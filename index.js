@@ -7,9 +7,8 @@ const teamRouter = require("./Team/router");
 function onListen() {
   console.log(`Listening on :${port}`);
 }
-
-const jsonMiddleware = express.json();
-app.use(jsonMiddleware);
+const jsonParser = bodyParser.json();
+app.use(jsonParser);
 app.use(teamRouter);
 
 app.listen(port, onListen);
