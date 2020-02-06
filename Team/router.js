@@ -6,7 +6,7 @@ const router = new Router();
 
 router.get(
   "/Team", // list of all Team (REST)
-  async (request, response, next) => {
+  async function(request, response, next) {
     try {
       const teams = await Team.findAll();
       response.send(teams);
@@ -16,6 +16,16 @@ router.get(
     }
   }
 );
+
+router.post("/Team", async function(request, response, next) {
+  try {
+    const team = await Team.create(request.body);
+
+    response.send(team);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
 
