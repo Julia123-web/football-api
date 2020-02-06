@@ -2,13 +2,25 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 4000;
 
-const teams = require("./Team/model");
-console.log("I WANT TO SEE", teams);
+const teamRouter = require("./Team/router");
 
-const db = require("./db");
-console.log("SEE THIS", db);
+function onListen() {
+  console.log(`Listening on :${port}`);
+}
 
-// app.use("/Team", teams);
-// app.use("/db", db);
+const jsonMiddleware = express.json();
+app.use(jsonMiddleware);
+app.use(teamRouter);
 
-app.listen(port, () => console.log(`Listening on: ${port}`));
+app.listen(port, onListen);
+
+// const teams = require("./Team/model");
+// console.log("I WANT TO SEE", teams);
+
+// const db = require("./db");
+// console.log("SEE THIS", db);
+
+// app.get("./Team", (request, response) => {
+//   console.log("app test");
+//   response.send("app");
+// });
