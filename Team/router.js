@@ -17,6 +17,15 @@ router.get(
   }
 );
 
+router.get("/Team/:id", async (request, response, next) => {
+  try {
+    const team = await Team.findByPk(request.params.id);
+    response.send(team);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/Team", async function(request, response, next) {
   try {
     const team = await Team.create(request.body);
