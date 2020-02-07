@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 4000;
 
+// const players = require("./player/model");
+// console.log("It's working?", players);
+
 const teamRouter = require("./Team/router");
+const playerRouter = require("./player/router");
 
 function onListen() {
   console.log(`Listening on :${port}`);
@@ -10,6 +14,7 @@ function onListen() {
 const jsonParser = express.json();
 app.use(jsonParser);
 app.use(teamRouter);
+app.use(playerRouter);
 
 app.listen(port, onListen);
 
